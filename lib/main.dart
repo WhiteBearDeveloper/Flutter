@@ -66,6 +66,61 @@ class _LoginScreenState extends State<LoginScreen>{
                         fontSize: 30.0,
                         fontWeight: FontWeight.bold
                       )
+                    ),
+                    SizedBox(
+                      height: 30.0,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          'Email',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'OpenSans'
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          decoration: BoxDecoration(
+                            color: Color(0xFF6Ca8F1),
+                            borderRadius: BorderRadius.circular(10.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black12,
+                                blurRadius: 6.0,
+                                offset: Offset(0,2)
+                              )
+                            ]
+                          ),
+                          height: 60.0,
+                          child: TextField(
+                            keyboardType: TextInputType.emailAddress,
+                            style: TextStyle(
+                              color: Colors.white
+                            ),
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              contentPadding: EdgeInsets.only(
+                                top: 14.0
+                              ),
+                              prefixIcon: Icon(
+                                Icons.email,
+                                color: Colors.white
+                              ),
+                              hintText: 'Enter your Email',
+                              hintStyle: TextStyle(
+                                color: Colors.white54,
+                                fontFamily: 'OpenSans'
+                              ),
+                            ),
+                          )
+                        )
+                      ]
                     )
                   ],
                 ),
