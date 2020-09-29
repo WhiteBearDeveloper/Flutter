@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -24,6 +25,70 @@ class LoginScreen extends StatefulWidget{
 }
 
 class _LoginScreenState extends State<LoginScreen>{
+
+  bool _rememberMe = false;
+
+  Widget _buildInputText(String label, String placeholder, int icon, bool obscured){
+    return
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            label,
+            style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'OpenSans'
+            ),
+          ),
+          SizedBox(
+            height: 10.0,
+          ),
+          Container(
+              alignment: Alignment.centerLeft,
+              decoration: BoxDecoration(
+                  color: Color(0xFF6Ca8F1),
+                  borderRadius: BorderRadius.circular(10.0),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 6.0,
+                        offset: Offset(0,2)
+                    )
+                  ]
+              ),
+              height: 60.0,
+              child: TextField(
+                keyboardType: TextInputType.emailAddress,
+                obscureText: obscured,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'OpenSans'
+                ),
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.only(
+                      top: 14.0
+                  ),
+                  prefixIcon: Icon(
+                      IconData(
+                          icon,
+                          fontFamily: 'MaterialIcons'
+                      ),
+                      color: Colors.white
+                  ),
+                  hintText: placeholder,
+                  hintStyle: TextStyle(
+                      color: Colors.white54,
+                      fontFamily: 'OpenSans'
+                  ),
+                ),
+              )
+          )
+        ]
+    );
+  }
+
   @override
 
   Widget build(BuildContext context){
@@ -70,57 +135,48 @@ class _LoginScreenState extends State<LoginScreen>{
                     SizedBox(
                       height: 30.0,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Email',
+                    _buildInputText('Email', 'Enter your Email', 57534, false),
+                    SizedBox(
+                      height: 30.0,
+                    ),
+                    _buildInputText('Password', 'Enter your Password', 59543, true),
+                    Container(
+                      alignment: Alignment.centerRight,
+                      child: FlatButton(
+                        padding: EdgeInsets.only(
+                          right: 0.0
+                        ),
+                        child: Text(
+                          'Forgot Password?',
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontFamily: 'OpenSans'
+                            fontFamily: 'OpenSans',
                           ),
                         ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          decoration: BoxDecoration(
-                            color: Color(0xFF6Ca8F1),
-                            borderRadius: BorderRadius.circular(10.0),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black12,
-                                blurRadius: 6.0,
-                                offset: Offset(0,2)
-                              )
-                            ]
-                          ),
-                          height: 60.0,
-                          child: TextField(
-                            keyboardType: TextInputType.emailAddress,
-                            style: TextStyle(
-                              color: Colors.white
+                        onPressed: () => print('Forgot password Button Pressed'),
+                      ),
+                    ),
+                    Container(
+                      child: Row(
+                        children: <Widget>[
+                          Theme(
+                            data: ThemeData(
+                              unselectedWidgetColor: Colors.white
                             ),
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.only(
-                                top: 14.0
-                              ),
-                              prefixIcon: Icon(
-                                Icons.email,
-                                color: Colors.white
-                              ),
-                              hintText: 'Enter your Email',
-                              hintStyle: TextStyle(
-                                color: Colors.white54,
-                                fontFamily: 'OpenSans'
-                              ),
-                            ),
+                            child: Checkbox(
+                              value: _rememberMe,
+                              checkColor: Colors.green,
+                              activeColor: Colors.white,
+                              onChanged: (value) {
+                                setState(() {
+                                  _rememberMe = value;
+                                });
+                              },
+                            )
                           )
-                        )
-                      ]
+                        ]
+                      ),
                     )
                   ],
                 ),
