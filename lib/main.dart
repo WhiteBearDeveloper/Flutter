@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 void main() {
   runApp(MyApp());
@@ -86,6 +87,37 @@ class _LoginScreenState extends State<LoginScreen>{
               )
           )
         ]
+    );
+  }
+
+  Widget _buildFAIcon(String text, int icon){
+    return GestureDetector(
+      onTap: () => print(text),
+      child: Container(
+        height: 60.0,
+        width: 60.0,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black26,
+                offset: Offset(
+                    0,2
+                ),
+                blurRadius: 6.0
+            )
+          ],
+        ),
+        child: Icon(
+          IconData(
+            icon,
+            fontFamily: 'FontAwesomeBrands',
+            fontPackage: 'font_awesome_flutter',
+          ),
+          color: Colors.blue,
+        ),
+      ),
     );
   }
 
@@ -211,7 +243,41 @@ class _LoginScreenState extends State<LoginScreen>{
                           ),
                         ),
                       ),
-                    )
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Text(
+                          '- OR ',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        Text(
+                          'Sign in width',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'OpenSans',
+                          ),
+                        )
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 30.0
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          _buildFAIcon('Login with Facebook', 0xf39e),
+                          _buildFAIcon('Login with Google', 0xf1a0),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
