@@ -5,49 +5,49 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(title: Text('Экраны')),
-      body: new ListView(children: [
-        GestureDetector(
-          onTap: () => {
-            Navigator.pushNamed(context, '/login-screen')
-          },
-          child: Text(
-            'Форма авторизации',
-            style: TextStyle(
-                color: Colors.white
+        backgroundColor: Colors.black,
+        appBar: AppBar(title: Text('Экраны')),
+        body: new ListView(children: <Widget>[
+          ListTile(
+            leading: CircleAvatar(
+              child: Icon(
+                Icons.account_circle_outlined,
+                size: 40,
+                color: Colors.white,
+              ),
+              backgroundColor: Colors.transparent,
             ),
+            title: Text(
+              'Login',
+              style: TextStyle(
+                color: Colors.white,
+              )
+            ),
+            subtitle: Text(
+              'Screen with login form',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            trailing: Icon(
+              Icons.keyboard_arrow_right,
+              color: Colors.white,
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, '/login-screen');
+            },
           ),
-        ),
-        Divider(
-          color: Colors.white,
-        ),
-      ])// ListView
-      // body: Center(
-      //   child: Column(children: [
-      //     RaisedButton(
-      //       onPressed: (){
-      //         Navigator.pushNamed(context, '/login-screen');
-      //       },
-      //       child: Text(
-      //         'Форма авторизации',
-      //         style: TextStyle(
-      //           color: Colors.white
-      //         ),
-      //       )
-      //     )
-      //   ],)
-      // ),
-    );
+          Divider(
+            color: Colors.white,
+          ),
+        ] // ListView
+            ));
   }
 }
 
 void main() {
-  runApp(MaterialApp(
-      initialRoute: '/',
-      routes: {
-        '/':(BuildContext context) => MainScreen(),
-        '/login-screen':(BuildContext context) => WBLoginScreen()
-      }
-  ));
+  runApp(MaterialApp(initialRoute: '/', routes: {
+    '/': (BuildContext context) => MainScreen(),
+    '/login-screen': (BuildContext context) => WBLoginScreen()
+  }));
 }
