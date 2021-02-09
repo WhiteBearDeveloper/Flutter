@@ -7,17 +7,19 @@ class ScreensList extends StatefulWidget {
 }
 
 class ScreensState extends State<ScreensList> {
-  Map<String, String> screenList = {
-    'title': 'Login',
-    'description': 'Screen with login form',
-    'link': '/login-screen'
-  };
+  List<Map<String, String>> screenList = [
+    {
+      'title': 'Login',
+      'description': 'Screen with login form',
+      'link': '/login-screen'
+    }
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.only(top: 40.0),
-      children: <Widget>[
+    var screenWidgetList = List<Widget>();
+    screenList.forEach((element) {
+      screenWidgetList.add(
         ListTile(
           leading: CircleAvatar(
             child: Icon(
@@ -27,12 +29,12 @@ class ScreensState extends State<ScreensList> {
             ),
             backgroundColor: Colors.transparent,
           ),
-          title: Text('Login',
+          title: Text(element['title'],
               style: TextStyle(
                 color: Colors.white,
               )),
           subtitle: Text(
-            'Screen with login form',
+            element['description'],
             style: TextStyle(
               color: Colors.white,
             ),
@@ -42,14 +44,20 @@ class ScreensState extends State<ScreensList> {
             color: Colors.white,
           ),
           onTap: () {
-            Navigator.pushNamed(context, '/login-screen');
+            Navigator.pushNamed(context, element['link']);
           },
         ),
+      );
+      screenWidgetList.add(
         Divider(
           color: Colors.white,
           height: 1.0,
-        ),
-      ],
+        )
+      );
+    });
+    return ListView(
+      padding: EdgeInsets.only(top: 40.0),
+      children: screenWidgetList,
     );
   }
 }
@@ -74,42 +82,7 @@ class MainScreen extends StatelessWidget {
                       fontSize: 30.0,
                       fontWeight: FontWeight.bold)),
               Expanded(
-                child: ListView(
-                  padding: EdgeInsets.only(top: 40.0),
-                  children: <Widget>[
-                    ListTile(
-                      leading: CircleAvatar(
-                        child: Icon(
-                          Icons.account_circle_outlined,
-                          size: 40,
-                          color: Colors.white,
-                        ),
-                        backgroundColor: Colors.transparent,
-                      ),
-                      title: Text('Login',
-                          style: TextStyle(
-                            color: Colors.white,
-                          )),
-                      subtitle: Text(
-                        'Screen with login form',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                      trailing: Icon(
-                        Icons.keyboard_arrow_right,
-                        color: Colors.white,
-                      ),
-                      onTap: () {
-                        Navigator.pushNamed(context, '/login-screen');
-                      },
-                    ),
-                    Divider(
-                      color: Colors.white,
-                      height: 1.0,
-                    ),
-                  ],
-                ),
+                child: ScreensList(),
               )
             ],
           ),
