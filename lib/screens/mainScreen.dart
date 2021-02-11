@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './../data/screensList.dart';
 
 class ScreensList extends StatefulWidget {
   @override
@@ -6,15 +7,8 @@ class ScreensList extends StatefulWidget {
 }
 
 class ScreensState extends State<ScreensList> {
-  List<Map<String, String>> screenList = [
-    {
-      'title': 'Login',
-      'description': 'Screen with login form',
-      'link': '/login-screen'
-    }
-  ];
-
   @override
+
   Widget build(BuildContext context) {
     var screenWidgetList = List<Widget>();
     screenList.forEach((element) {
@@ -61,7 +55,12 @@ class ScreensState extends State<ScreensList> {
   }
 }
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
+  @override
+  createState() => new MainScreenState();
+}
+
+class MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
