@@ -1,7 +1,10 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import './../data/screensList.dart';
 
 class ScreensList extends StatefulWidget {
+  final List<Screen> screens;
+  ScreensList({Key key, this.screens});
   @override
   createState() => new ScreensState();
 }
@@ -80,10 +83,27 @@ class MainScreenState extends State<MainScreen> {
                       fontSize: 30.0,
                       fontWeight: FontWeight.bold)),
               Expanded(
-                child: ScreensList(),
+                // child: ScreensList(),
+                child: new FutureBuilder(
+                  future: DefaultAssetBundle.of(context)
+                      .loadString('assets/screensList.json'),
+                  builder: (context, snapshot) {
+                    List<Screen> screens =
+                    parseJson(snapshot.data.toString());
+                    return !screens.isEmpty
+                        ? new ScreensList(screens: screens)
+                        : new Center(child: new CircularProgressIndicator());
+                  }),
               )
             ],
           ),
         ));
+  }
+  List<Screen> parseJson(String response) {
+    if(response==null){
+      return [];
+    }
+    final parsed = json.decode(response.toString()).cast<Map<String, dynamic>>();
+    return parsed.map<Screen>((json) => new Screen.fromJson(json)).toList();
   }
 }
