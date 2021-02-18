@@ -2,58 +2,43 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import './../data/screensList.dart';
 
-class ScreensList extends StatefulWidget {
+class ScreensList extends StatelessWidget {
   final List<Screen> screens;
   ScreensList({Key key, this.screens});
   @override
-  createState() => new ScreensState();
-}
-
-class ScreensState extends State<ScreensList> {
-  @override
 
   Widget build(BuildContext context) {
-    var screenWidgetList = List<Widget>();
-    screenList.forEach((element) {
-      screenWidgetList.add(
-        ListTile(
-          leading: CircleAvatar(
-            child: Icon(
-              Icons.account_circle_outlined,
-              size: 40,
-              color: Colors.white,
+    new ListView.builder(
+      itemCount: screens == null ? 0 : screens.length,
+      itemBuilder: (BuildContext context, int index){
+        return ListTile(
+            leading: CircleAvatar(
+              child: Icon(
+                Icons.account_circle_outlined,
+                size: 40,
+                color: Colors.white,
+              ),
+              backgroundColor: Colors.transparent,
             ),
-            backgroundColor: Colors.transparent,
-          ),
-          title: Text(element['title'],
+            title: Text(screens[index].title,
+                style: TextStyle(
+                  color: Colors.white,
+                )),
+            subtitle: Text(
+              screens[index].description,
               style: TextStyle(
                 color: Colors.white,
-              )),
-          subtitle: Text(
-            element['description'],
-            style: TextStyle(
+              ),
+            ),
+            trailing: Icon(
+              Icons.keyboard_arrow_right,
               color: Colors.white,
             ),
-          ),
-          trailing: Icon(
-            Icons.keyboard_arrow_right,
-            color: Colors.white,
-          ),
-          onTap: () {
-            Navigator.pushNamed(context, element['link']);
-          },
-        ),
-      );
-      screenWidgetList.add(
-          Divider(
-            color: Colors.white,
-            height: 1.0,
-          )
-      );
-    });
-    return ListView(
-      padding: EdgeInsets.only(top: 40.0),
-      children: screenWidgetList,
+            onTap: () {
+              Navigator.pushNamed(context, screens[index].link);
+            },
+          );
+      },
     );
   }
 }
@@ -85,12 +70,10 @@ class MainScreenState extends State<MainScreen> {
               Expanded(
                 // child: ScreensList(),
                 child: new FutureBuilder(
-                  future: DefaultAssetBundle.of(context)
-                      .loadString('assets/screensList.json'),
+                  future: DefaultAssetBundle.of(context).loadString('assets/screensList.json'),
                   builder: (context, snapshot) {
-                    List<Screen> screens =
-                    parseJson(snapshot.data.toString());
-                    return !screens.isEmpty
+                    List<Screen> screens = parseJson(snapshot.data.toString());
+                    return screens.isNotEmpty
                         ? new ScreensList(screens: screens)
                         : new Center(child: new CircularProgressIndicator());
                   }),

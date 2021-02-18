@@ -1,0 +1,12 @@
+[
+  {
+    "title": "Login",
+    "description": "Screen with login form",
+    "link": "/login-screen"
+  },
+  {
+    "title": "Example",
+    "description": "Example description",
+    "link": "/login-screen"
+  }
+]
