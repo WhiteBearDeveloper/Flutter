@@ -1,20 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-class WBLoginScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: LoginScreen(),
-    );
-  }
-}
+import './../features/loginScreen/inputText.dart';
+import './../features/loginScreen/iconFA.dart';
 
 class LoginScreen extends StatefulWidget{
   @override
@@ -24,98 +11,6 @@ class LoginScreen extends StatefulWidget{
 class _LoginScreenState extends State<LoginScreen>{
 
   bool _rememberMe = false;
-
-  Widget _buildInputText(String label, String placeholder, int icon, bool obscured){
-    return
-      Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              label,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'OpenSans'
-              ),
-            ),
-            SizedBox(
-              height: 10.0,
-            ),
-            Container(
-                alignment: Alignment.centerLeft,
-                decoration: BoxDecoration(
-                    color: Color(0xFF6Ca8F1),
-                    borderRadius: BorderRadius.circular(10.0),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 6.0,
-                          offset: Offset(0,2)
-                      )
-                    ]
-                ),
-                height: 60.0,
-                child: TextField(
-                  keyboardType: TextInputType.emailAddress,
-                  obscureText: obscured,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'OpenSans'
-                  ),
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.only(
-                        top: 14.0
-                    ),
-                    prefixIcon: Icon(
-                        IconData(
-                            icon,
-                            fontFamily: 'MaterialIcons'
-                        ),
-                        color: Colors.white
-                    ),
-                    hintText: placeholder,
-                    hintStyle: TextStyle(
-                        color: Colors.white54,
-                        fontFamily: 'OpenSans'
-                    ),
-                  ),
-                )
-            )
-          ]
-      );
-  }
-
-  Widget _buildFAIcon(String text, int icon){
-    return GestureDetector(
-      onTap: () => print(text),
-      child: Container(
-        height: 60.0,
-        width: 60.0,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-                color: Colors.black26,
-                offset: Offset(
-                    0,2
-                ),
-                blurRadius: 6.0
-            )
-          ],
-        ),
-        child: Icon(
-          IconData(
-            icon,
-            fontFamily: 'FontAwesomeBrands',
-            fontPackage: 'font_awesome_flutter',
-          ),
-          color: Colors.blue,
-        ),
-      ),
-    );
-  }
 
   @override
 
@@ -167,11 +62,11 @@ class _LoginScreenState extends State<LoginScreen>{
                         SizedBox(
                           height: 30.0,
                         ),
-                        _buildInputText('Email', 'Enter your Email', 57534, false),
+                        inputText('Email', 'Enter your Email', 57534, false),
                         SizedBox(
                           height: 30.0,
                         ),
-                        _buildInputText('Password', 'Enter your Password', 59543, true),
+                        inputText('Password', 'Enter your Password', 59543, true),
                         Container(
                           alignment: Alignment.centerRight,
                           child: FlatButton(
@@ -273,8 +168,8 @@ class _LoginScreenState extends State<LoginScreen>{
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
-                              _buildFAIcon('Login with Facebook', 0xf39e),
-                              _buildFAIcon('Login with Google', 0xf1a0),
+                              iconFA('Login with Facebook', 0xf39e),
+                              iconFA('Login with Google', 0xf1a0),
                             ],
                           ),
                         ),
