@@ -1,15 +1,18 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import './../data/screensList.dart';
+import './../features/mainScreen/screenItem.dart';
 
 class ScreensList extends StatelessWidget {
-  final List<Screen> screens;
+  final List<ScreenItem> screens;
   ScreensList({Key key, this.screens});
   @override
-
   Widget build(BuildContext context) {
-    new ListView.builder(
+    return new ListView.separated(
       itemCount: screens == null ? 0 : screens.length,
+      separatorBuilder: (_, __) => const Divider(
+          color: Colors.white,
+          height: 1.0,
+      ),
       itemBuilder: (BuildContext context, int index){
         return ListTile(
             leading: CircleAvatar(
@@ -68,11 +71,10 @@ class MainScreenState extends State<MainScreen> {
                       fontSize: 30.0,
                       fontWeight: FontWeight.bold)),
               Expanded(
-                // child: ScreensList(),
                 child: new FutureBuilder(
-                  future: DefaultAssetBundle.of(context).loadString('assets/screensList.json'),
+                  future: DefaultAssetBundle.of(context).loadString('lib/data/screensList.json'),
                   builder: (context, snapshot) {
-                    List<Screen> screens = parseJson(snapshot.data.toString());
+                    List<ScreenItem> screens = parseJson(snapshot.data.toString());
                     return screens.isNotEmpty
                         ? new ScreensList(screens: screens)
                         : new Center(child: new CircularProgressIndicator());
@@ -82,11 +84,11 @@ class MainScreenState extends State<MainScreen> {
           ),
         ));
   }
-  List<Screen> parseJson(String response) {
+  List<ScreenItem> parseJson(String response) {
     if(response==null){
       return [];
     }
     final parsed = json.decode(response.toString()).cast<Map<String, dynamic>>();
-    return parsed.map<Screen>((json) => new Screen.fromJson(json)).toList();
+    return parsed.map<ScreenItem>((json) => new ScreenItem.fromJson(json)).toList();
   }
 }

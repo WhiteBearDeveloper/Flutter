@@ -46,7 +46,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/screensList.json
+    - lib/data/screensList.json
 
   # To add assets to your application, add an assets section, like this:
   # assets:
