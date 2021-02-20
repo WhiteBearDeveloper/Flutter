@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class ScreenItem {
   final String title;
   final String description;
@@ -12,4 +14,12 @@ class ScreenItem {
       link: json['link'] as String,
     );
   }
+}
+
+List<ScreenItem> parseScreenItemJson(String response) {
+  if(response==null){
+    return [];
+  }
+  final parsed = json.decode(response.toString()).cast<Map<String, dynamic>>();
+  return parsed.map<ScreenItem>((json) => new ScreenItem.fromJson(json)).toList();
 }
