@@ -50,7 +50,7 @@ class MainScreenState extends State<MainScreen> {
                   decoration: new BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(
-                          "lib/images/white-bear.png"),
+                          "lib/images/mainScreen/white-bear.png"),
                       fit: BoxFit.cover,
                       colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.34), BlendMode.dstATop),
                     ),

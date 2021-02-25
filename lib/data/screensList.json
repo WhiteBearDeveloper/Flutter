@@ -3,5 +3,10 @@
     "title": "Login",
     "description": "Screen with login form",
     "link": "/login-screen"
+  },
+  {
+    "title": "Pets",
+    "description": "Screen with pets adoption UI",
+    "link": "/pet-adoption-screen"
   }
 ]
