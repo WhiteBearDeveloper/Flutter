@@ -44,8 +44,8 @@ var pets = [
   Pet(
     owner: owner,
     name: 'Pupper Katherine',
-    imageUrl: 'assets/images/pug.jpg',
-    description: 'French black puppy',
+    imageUrl: 'lib/images/petAdoptionScreen/black-puppy.jpg',
+    description: 'Black puppy',
     age: 2,
     sex: 'Female',
     color: 'Black',
@@ -54,7 +54,7 @@ var pets = [
   Pet(
     owner: owner,
     name: 'Little Darlene',
-    imageUrl: 'assets/images/lab.png',
+    imageUrl: 'lib/images/petAdoptionScreen/dog.jpg',
     description: 'Labrador retriever puppy',
     age: 1,
     sex: 'Female',
@@ -156,6 +156,9 @@ class _petAdoptionScreenMainState extends State<petAdoptionScreenMain>{
               ),
             ),
           ),
+          SizedBox(
+            height: 50.0,
+          ),
           Container(
             height: 100.0,
             child: ListView(
@@ -180,6 +183,34 @@ class _petAdoptionScreenMainState extends State<petAdoptionScreenMain>{
                 petCategory(true, 'Dogs'),
                 petCategory(false, 'Birds'),
                 petCategory(false, 'Other'),
+              ],
+            ),
+          ),
+          Padding(
+              padding: EdgeInsets.only(
+                left: 40.0,
+                bottom: 30.0
+              ),
+            child: Column(
+              children: <Widget>[
+                Hero(
+                  tag: pets[0].id,
+                  child: Container(
+                    width: double.infinity,
+                    height: 250.0,
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20.0),
+                        bottomLeft: Radius.circular(20.0)
+                      ),
+                      image: DecorationImage(
+                        image: AssetImage(pets[0].imageUrl),
+                        fit: BoxFit.cover
+                      )
+                    ),
+                  ),
+                )
               ],
             ),
           )
