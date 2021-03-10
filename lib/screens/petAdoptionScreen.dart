@@ -55,7 +55,7 @@ var pets = [
     owner: owner,
     name: 'Little Darlene',
     imageUrl: 'lib/images/petAdoptionScreen/dog.jpg',
-    description: 'Labrador retriever puppy',
+    description: 'Labrador retriever',
     age: 1,
     sex: 'Female',
     color: 'White',
@@ -156,8 +156,11 @@ class _petAdoptionScreenMainState extends State<petAdoptionScreenMain>{
               ),
             ),
           ),
-          SizedBox(
-            height: 50.0,
+          Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 40.0,
+                vertical: 15.0
+              )
           ),
           Container(
             height: 100.0,
@@ -186,12 +189,16 @@ class _petAdoptionScreenMainState extends State<petAdoptionScreenMain>{
               ],
             ),
           ),
+          SizedBox(
+            height: 50.0,
+          ),
           Padding(
               padding: EdgeInsets.only(
                 left: 40.0,
                 bottom: 30.0
               ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Hero(
                   tag: pets[0].id,
@@ -208,6 +215,101 @@ class _petAdoptionScreenMainState extends State<petAdoptionScreenMain>{
                         image: AssetImage(pets[0].imageUrl),
                         fit: BoxFit.cover
                       )
+                    ),
+                  ),
+                ),
+                Padding(
+                    padding: EdgeInsets.fromLTRB(12.0, 12.0, 40.0, 0.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          pets[0].name,
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold
+                          ),
+                        ),
+                        IconButton(
+                            icon: Icon(Icons.favorite_border),
+                            iconSize: 30.0,
+                            color: Theme.of(context).primaryColor,
+                            onPressed: () => print('Favorite ${pets[0].name}')
+                        )
+                      ],
+                    )
+                ),
+                Padding(
+                    padding: EdgeInsets.fromLTRB(12.0, 0.0, 40.0, 12.0),
+                    child: Text(
+                      pets[0].description,
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 16.0,
+                        color: Colors.grey
+                      ),
+                    ),
+                )
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+                left: 40.0,
+                bottom: 30.0
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Hero(
+                  tag: pets[1].id,
+                  child: Container(
+                    width: double.infinity,
+                    height: 250.0,
+                    decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20.0),
+                            bottomLeft: Radius.circular(20.0)
+                        ),
+                        image: DecorationImage(
+                            image: AssetImage(pets[1].imageUrl),
+                            fit: BoxFit.cover
+                        )
+                    ),
+                  ),
+                ),
+                Padding(
+                    padding: EdgeInsets.fromLTRB(12.0, 12.0, 40.0, 0.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          pets[1].name,
+                          style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontSize: 24.0,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
+                        IconButton(
+                            icon: Icon(Icons.favorite_border),
+                            iconSize: 30.0,
+                            color: Theme.of(context).primaryColor,
+                            onPressed: () => print('Favorite ${pets[1].name}')
+                        )
+                      ],
+                    )
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(12.0, 0.0, 40.0, 12.0),
+                  child: Text(
+                    pets[1].description,
+                    style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 16.0,
+                        color: Colors.grey
                     ),
                   ),
                 )
